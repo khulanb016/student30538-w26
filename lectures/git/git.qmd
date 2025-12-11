@@ -1,0 +1,1074 @@
+---
+title: "Version Control (Lecture 1)"
+author: "Peter Ganong, Maggie Shi, and Will Pennington"
+date: "2025-10-17"
+format:
+    revealjs:
+        slide-number: true
+        show-slide-number: all
+
+---
+
+# Conceptual 
+
+## Roadmap
+* What is version control?
+* What is Git and why do I need it?
+* How (not) to learn git 
+
+
+## What is version control?
+![](img/comic.png){fig-align="center" width=80%}
+
+
+## What is version control?
+* Version control: a system that records changes to a file or set of files over time so that you can recall specific versions later
+* Examples of version control
+    * Informal: date multiple versions of a document
+    * Tools like dropbox and google docs do this automatically
+
+## What is centralized version control?
+
+Centralized version control allows for easy collaboration across developers
+
+![](img/centralized_vc.png){fig-align="center" width=70%}
+
+Note: a repository is basically a folder directory with extra capabilities 
+
+## Git: "distributed" version control 
+* Each computer fully mirrors the repository, including its full history
+
+<img src="img/distributed_vc.png" style="display:block; margin:0 auto;">
+
+## Define terms {style="font-size: 0.8em"}
+* Git: software used for version control locally (i.e., on your computer)
+* Github: hosting service for git repositories -- i.e., a place to store them online
+    * There are other hosting services for git like Bitbucket and GitLab. You can also run your own git server if you really want to!
+
+## Why should you learn Git in general?
+* Git never loses anything. 
+* Useful for solo projects for version control (as opposed to: `final_report_revised_v5_maggieedits.qmd`)
+* Crucial in group projects to make sure you don't write over others' work or break something.
+* Crucial for "teamwork" with AI agents (typical workflow is that AI agent proposes work for you to review)
+
+## A skeptic's question
+> If dropbox and google docs can track changes automatically (and there are similar tools for code like Google Colab and [VSCode for the web](https://code.visualstudio.com/docs/editor/vscode-web)) then why do we even need to use git?
+
+Answer
+
+* Code is different from other types of documents because **it needs to run**. 
+* You want to save code that runs as intended and you don't want to save code that doesn't run. 
+* This is different from a memo or a slide deck where it is harmless to save every keystroke.
+
+## How will you use git in this class?
+* Download lecture notes and assignments
+* Submit psets and final project 
+* Collaboration on psets and final project -- can work parallel as opposed to sequentially, and work without fear of writing over others' work
+
+
+## How to learn git
+
+1. Accept that this is tricky and you will make mistakes
+2. We are going to try a TON of different ways to teach this
+    * graphical
+    * code examples
+    * do-pair-share in class
+    * video game on pset
+    * exercises on pset
+
+## How not to learn git
+
+* Command line git is what will be assessed on the quiz, the pset, and the final. 
+    * I.e., using Terminal or Powershell -- where you have been running the `conda activate` commands 
+* There are tools that try to make git easier, like VSCode's git panel, Github Desktop, Github.com web upload. Do not use them in this class. If you start using that then you won't understand as well what is happening under the hood.
+* Once you have a good grasp of git, then use whatever tool you are fastest in (fwiw, your professors find that command line is fastest!)
+
+## Summary
+* Version control lets you experiment freely
+* We will teach git in lots of different ways
+* Understanding git is crucial for collaborating with humans or AI agents
+
+## Roadmap to the rest of lecture  {style="font-size: 0.8em"}
+
+Sources: Textbook: **[Pro Git](https://git-scm.com/book/en/v2)**, we will only cover a short bit; Video: [Git for ages 4 and up](https://www.youtube.com/watch?v=1ffBJ4sVUb4)
+
+| Section |  Pro Git Chapter | Uses internet? | 
+|------|----------| ---- | 
+| ~~Conceptual~~   | Chapter 1 (Getting Started) | -- | 
+| Track One Version on Local  |  Chapter 2.2 (Git Basics) | No |  
+| Branching   | Chapter 3.2 (Git Branching)   | No | 
+| Merging   | Chapter 3.2 (Git Branching)   | No | 
+| Merge Conflicts   | Chapter 3.2 (Git Branching)   | No | 
+| Reconciling with Remote   | Ch 2.5 and 3.5   | Yes[^1] | 
+
+[^1]: everything except the last section of lecture is all code that runs on your computer.
+
+<!--
+## Roadmap to the rest of lecture
+* Briefly introduce the command line
+* On your computer ("local") *version control doesn't require the internet!*
+    * Track changes to one version
+    * Track changes to multiple versions
+    * Reconcile changes to multiple versions
+* Bring in the internet ("remote")
+    * Reconcile changes to multiple versions
+-->
+
+# Command line + Track One Version on Local (Chapter 2.2)
+
+## Roadmap
+* Command line
+* Git workflow
+* File lifecycle
+* Basic Commands
+
+
+<!-- ## Git Project Sections
+
+1. Modified: you have changed a file, but not yet committed it to your database
+2. Staged: you have marked a modified file go to go in your next commit
+3. Committed: the file is stored in your local database
+
+![](img/three_sections.png){fig-align="center" height=50%} -->
+
+
+<!--
+## Git workflow
+
+Every git repo has a hidden `.git` folder containing the database
+
+Git does not track every file that is in the directory containing `.git`. Instead, you decide which files to track.
+
+1. Modify files in your working tree
+2. Selectively add files you want to commit to your staging area
+3. Commit: permanently tracks the staged files as part of the version control system 
+
+Analogy: in the standard workflow, steps 2 and 3 happen automatically after you save. In Git, you choose when this happens to ensure you don't "save" something that breaks the code. 
+-->
+
+
+## Why use the command line
+
+* Direct control over files, processes, and version control tools like Git
+* Automates repetitive tasks otherwise done via point-and-click in an app
+* Same commands across environments—great for collaboration and reproducible workflows
+* This is how AI agents work. To understand what they are doing for you you need the command line.
+
+## Review of commands {style="font-size: 0.8em"}
+
+| Action | macOS (Terminal ) or Windows (PowerShell) |
+| --- | --- | 
+| Show current folder | `pwd` | 
+| List files in folder | `ls` |  
+| Navigate inside a folder | `cd <folder>` | 
+| Navigate up one level | `cd ..` |
+| Copy a file | `cp <source_file> <new_file_name>` |
+
+| Action | macOS (Terminal ) | Windows (PowerShell) |
+| --- | --- | --- |
+| Navigate to root folder | `cd ~` | `cd \`
+| Make an empty file | `touch <filename>` | `New-Item <filename>` |
+| View a text file quickly | `cat <filename>` | `Get-Content <filename>` |
+
+Will have a minilesson to show more of this at lab today
+
+## Create a new repo
+
+We will use `%` to indicate material run at command line. On some computers it will appear as `PS C:\>`.
+
+1. `% cd <directory_for_repo>` -- where we want our new repo to be inside of
+2. `% git init <repo_name>` -- creates a new repo called `<repo_name>` that has git capabilities
+3. `% cd <repo_name>` to navigate to inside the new repo
+
+
+
+## File lifecycle -- statuses  {style="font-size: 0.8em"}
+
+![](img/file_lifecycle_cropped.png){fig-align="center"}
+
+* Untracked -- file is not tracked by git in any way
+* Version controlled files
+    * Unmodified -- file has not changed since last commit
+    * File has changed since last commit
+        * Modified -- user has not asked git to record the change
+        * Staged -- user will soon ask git to record the change
+
+## the three most important git commands
+
+| command | what it does |
+| --- | --- |
+| `git status` | check which files have changed |
+| `git add <filename>` | stage a file | 
+| `git commit -m "<message>"` | commit all staged files |
+
+We will now walk through an first worked example of how to use git
+
+## worked example (1 of 4)
+Create a new repo called `test`
+```{}
+% git init test
+% cd test
+% ls
+<empty>
+```
+
+I make and save a new file called foo.txt
+```{}
+% echo "hello world" > foo.txt
+```
+
+I can see this file in my directory.
+```{}
+% ls
+foo.txt
+```
+
+And I can print the contents of this file
+
+```{}
+% cat foo.txt
+hello world
+```
+
+## Interpretation of step 1
+
+![](img/file_lifecycle_cropped.png){fig-align="center"}
+```{}
+% git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	foo.txt
+```
+
+We created an "untracked" file
+
+::: {.notes }
+Note the distinction between the file being *saved* within the repository, but still *untracked* from the point of view of Git/version control.
+:::
+
+
+
+
+<!--* See which files fall in each of the four buckets (note: "unmodified" files are not listed, the other three groups are) 
+* Just lists file names-->
+
+## worked example (2 of 4)
+I ask git to record my change ("stage")
+
+```{}
+% git add foo.txt
+% git status       
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   foo.txt
+```
+
+## Interpretation of step 2
+
+![](img/file_lifecycle.png){fig-align="center" width=80%}
+
+What did we do? we moved the file the full distance across the board, from "untracked" to "staged".
+
+<!--
+## Moving files through the lifecycle
+
+![](img/file_lifecycle.png){fig-align="center" width=80%}
+
+```{}
+% git commit -m "<message>"
+```
+
+* Commit files from staging area with a message. 
+* The message should be informative about what's in the commit: "debugged function to do XYZ"
+-->
+
+## worked example (3 of 4)
+
+```{}
+% git commit -m "create foo.txt"
+[master (root-commit) a6e1b8a] create foo.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 foo.txt
+% git status
+On branch master
+nothing to commit, working tree clean
+```
+
+## Interpretation of step 3
+
+![](img/file_lifecycle.png){fig-align="center" width=80%}
+
+What did we do? we moved the file from "staged" to "unmodified".
+
+
+## worked example (4 of 4)
+
+```{}
+% echo "This text will be added to the end." >> foo.txt
+% git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   foo.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+% git add foo.txt
+```
+
+
+## Interpretation of step 4
+
+![](img/file_lifecycle.png){fig-align="center" width=80%}
+
+1. We edited the file with `% echo "This text will be added to the end." >> foo.txt` ("unmodified" -> "modified").
+2. We staged the file with `% git add foo.txt` ("modified" -> "staged").
+
+
+## worked example (4 of 4)
+
+```{}
+% echo "This text will be added to the end." >> foo.txt
+% git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   foo.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+% git add foo.txt
+```
+
+
+## Do-Pair-Share 
+
+Before starting, run `% git --version` to verify that git is installed. (Installation [guide](https://github.com/git-guides/install-git))
+
+Go back through the slides in the worked example and run each of these steps at your command line. (We promise that future in-class exercises will be more complicated!)
+
+Questions
+
+1. What will we get if we run `git status` at the end of the example?
+2. What will we get if we run `git commit -m "my second commit"` and then run `git status`?
+
+::: {.notes }
+% git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   foo.txt
+
+% git commit -m "my second commit"
+[master 09ee4bb] my second commit
+ 1 file changed, 1 insertion(+)
+:::
+
+## Do-Pair-Share Commands Collected Together
+
+```{}
+% git init test
+% cd test
+% echo "hello world" > foo.txt
+% git status
+% git add foo.txt
+% git status   
+% git commit -m "create foo.txt"
+% git status
+% echo "This text will be added to the end." >> foo.txt
+% git add foo.txt
+```
+
+## Helpful git syntax
+
+
+1.  `% git log` prints log of recent commits
+2.  `% git diff` among files which have changed since last commit, go line-by-line to show changes
+3. `% git add .` adds all files (both untracked and modified) to the staging area
+
+
+## Git Ignore I
+
+* You will often have files or filetypes that you want Git to systematically avoid (*ignore*). Examples:
+  * Automatically-generated files from compiling Python (`.pyc`)
+  * Large data files (this will become very important on future psets)
+  * Mac users: `.DS_Store`!
+* Create a file called `.gitignore` to tell git which files to ignore
+* You must commit your `.gitignore` to the repo 
+
+
+## Git Ignore II
+Example `.gitignore` :
+
+```{}
+# ignore compiled python
+.pyc
+
+# ignore virtual environment packages
+.venv/
+
+# ignore pesky auto-created files on macs
+.DS_Store
+**/.DS_Store
+```
+See more examples **[here (link)](https://github.com/github/gitignore)** including for Python
+
+## Summary  {style="font-size: 0.8em"}
+
+| command | what it does |
+| --- | --- |
+| `git status` | check which files have changed |
+| `git diff` | line-by-line record of changes to tracked files |
+| `git add <filename>` | stage a file | 
+| `git commit -m "<message>"` | commit all staged files |
+| `git log ` | see recent commits
+
+* Use `.gitignore` to ignore irrelevant files
+
+## Do-Pair-Share gitignore (do in lab) {style="font-size: 0.7em"}
+
+1. In Terminal (Mac)/PowerShell (PC), create a repo named `test` 
+2. Change directory so you are inside the repo
+3. Create three files in a text editor (like VS Code): `small_file.txt`, `large_file.txt` and `.gitignore`
+4. Stage `small_file.txt` and then commit it with message "my first commit"
+5. Using a text editor, edit `.gitignore` to include the line `large_file.txt`
+    * Tip: `.gitignore` is a hidden file. May need to show hidden files in Finder (Mac) or File Explorer (PC)
+6. Commit `.gitignore` with a message saying "ignore large file"
+
+Tips: 
+
+* in between every single step run `git status`, `git diff`, and `git log`
+* When you are done, expect to get a message which says "On branch master, nothing to commit, working tree clean"
+
+# Track Multiple Versions on Local -- Branching (Chapter 3)
+
+## Roadmap
+* Branching: overview
+* Creating a New Branch
+* `HEAD` and Switching Branches
+* "Undo"
+
+## Branching {style="font-size: 0.6
+
+![](img/branching_1.png){fig-align="center" width=105%}
+
+* We will see a lot of images like this, so let's unpack it in some detail
+    * Three commits: `C0`, `C1`, `C2`
+        * These are horrible names for commits, I hope you never use these!
+        * But they are pedagogically quite useful because they convey chronology
+    * Every commit (except `C0`) has a parent
+    * A "branch" is a chain of commits. Branches: this repo has one branch labeled 
+        * Here: `master`. FYI: Github.com calls this `main`. 
+* Build this history using Tinkertoys (same toys used in "git for ages 4 and up" video, invented in Evanston Illinois!)   
+
+
+## Creating a New Branch {style="font-size: 0.8em"}
+![](img/branching_2.png){fig-align="center" width=75%}
+
+* Say we want to do some exploratory work in a safe environment without affecting the work other team members are doing --> *create a new branch*
+* `% git branch iss53` for issue 53. (Update tinkertoy)
+* Reminder: "A branch is a chain of commits." So at the moment both `master` and `iss53` label the chain C0 <- C1 <- C2
+* `% git branch ` returns a listing of your current branches
+
+## Introduce `HEAD` {style="font-size: 0.8em"}
+![](img/branching_2.png){fig-align="center" width=105%}
+
+* `HEAD` is your current position in the Git repo's history 
+    * Helpful analogy: if you think of each commit as a different folder, this is like your current working directory at the command line
+* Right now, the `HEAD` is in the `master` branch at commit `C2` (add `HEAD` to tinkertoy)
+* `% git switch iss53`
+* Switches our `HEAD` (i.e., where we are) to our new branch `iss53`  (update `HEAD` on tinkertoy)
+
+
+## Adding to a branch
+![](img/branching_3.png){fig-align="center" width=75%}
+
+
+```{}
+[make some changes to file.py]
+% git commit -m "C3: start work on new feature"
+```
+* Now `iss53` is the chain `C0 <- C1 <- C2 <- C3`.
+* `Master` untouched (it is still C0 <- C1 <- C2)
+
+## Undo conceptual {style="font-size: 0.7em"}
+
+From git for ages 4 and up
+
+> Git doesn’t throw things away once committed, you can always get back to where you were before
+
+There is **no way** to erase a commit[^2]
+
+So... how can I undo my work?
+
+[^2]: This is a slight simplification. If you must delete history (e.g. you committed some personally identifying information to the repo) there are ways to erase a commit.
+
+## "Undo" options {style="font-size: 0.7em"}
+
+| Scenario | command | gone forever?
+| --- | --- | --- | 
+| haven't commited yet | `git restore <file_name>` | yes | 
+| revise the most recent commit | `git commit --amend` | yes | 
+| undo changes from the most recent commit with a new commit | `git revert <commit>` | no | 
+| Move `HEAD` back by one commit |  `git reset HEAD~1` | no | 
+| Move `HEAD` to arbitrary prior commit | `git reset <commit>` | no | 
+
+Remark: it's unlikely you will commit (haha) all these scenarios to memory. Instead, use this slide as a helpful reference.
+
+::: {.notes}
+Only commits are written so if you change your most recent commit the old work is gone
+For revert, it adds a new commit on top labeled revert
+For operations which move `HEAD`, everything is preserved, you just change where you are checked out
+::: 
+
+## Summary
+* Working in branches creates an independent, safe development environment
+* Commits only modify current branch, leaving others untouched
+* Git doesn’t throw things away, you can always get back to where you were before. How you get there depends on what exactly you want to do.
+
+# Reconcile Multiple Versions on Local -- Merging (Chapter 3)
+
+## Roadmap
+* Fast forward merge
+* Three way merge
+
+
+## Fast forward merge I  {style="font-size: 0.7em"}
+* Your supervisor reaches out with an urgent matter. The dashboard you built is broken.
+* You want to pause existing work in `iss53`, switch back to `master`, and make adjustments in a new `hotfix` branch
+
+![](img/merging_1.png){fig-align="center" width=75%}
+
+
+```{}
+% git switch master 
+% git branch hotfix
+% git switch hotfix
+[make some changes to myfile.py]
+% git add myfile.py
+% git commit -m "commit message for C4"
+
+```
+
+
+## Fast forward merge II  {style="font-size: 0.7em"}
+You tested your work and you are ready to put it into production by updating the `master` copy of the code. 
+
+![](img/merging_2.png){fig-align="center" width=75%}
+
+```{}
+% git switch master 
+% git merge hotfix --ff-only
+% git branch -d hotfix
+```
+1. Navigate to `master`
+2. Bring changes from `hotfix` into `master`:  
+    * `--ff-only` specifies that this is a _"fast forward"_ merge
+    * update tinkertoy (all we need to do is move the location of the `master` label)
+3. You can now safely delete the branch `hotfix` (`git branch -d hotfix`)
+
+## Three way merge I
+* After addressing the urgent bug fix, you do some more work on `issue53` and add another commit `C5`.
+
+![](img/merging_3_v2.png){fig-align="center" width=75%}
+
+
+
+## Three way merge II
+*  You test the code and it is ready for production so you decide to bring this work into `master` as well (update tinkertoy)
+
+![](img/merging_3.png){fig-align="center" width=75%}
+
+This is called a _"three way merge"_ because it relies on three inputs: the *nearest common ancestor* (`C2`), current branch (`C4`), incoming branch (`C5`)
+
+## Three way merge III
+
+You ask git to merge but it refuses!
+
+```{}
+% git switch master 
+% git merge iss53 --ff-only
+hint: Diverging branches can't be fast-forwarded, you need to either:
+hint:
+hint: 	git merge --no-ff
+hint:
+hint: or:
+hint:
+hint: 	git rebase
+hint:
+```
+
+Problem: We need to combine C2, C4, and C5 into a single unified version of the code
+
+Solution `git merge --no-ff`: Git will combine the work for you, creating a new commit `C6`
+
+\tiny
+
+Remark: `git rebase` not covered in lecture, but you get to try it on the problem set.
+
+## Three way merge IV 
+
+```{}
+% git merge iss53 --no-ff -m "C6"
+Merge made by the 'ort' strategy.
+```
+
+![](img/merging_4.png){fig-align="center"}
+
+
+
+## Tips on merging 
+* We have taught `git merge <branch> --ff-only` and `git merge <branch> --no-ff -m "explain what's been merged"`. 
+* In principle, you can ask git to merge without telling it which type of merge or what is the commit message, but we discourage this. It's like joining multiple tables without knowing the details of the join (e.g. 1:1 or 1:many)!
+
+
+## Summary
+Once work has happened in multiple branches, there will likely be a desire to reconcile down to a single version of the code.
+
+| has work happened in multiple branches? | merge type | sample code | 
+| --- | --- |--- |
+| no | fast forward | `% git merge hotfix --ff-only`
+| yes | three way |  `% git merge iss53 --no-ff -m "msg"`
+
+
+# Merge conflicts (Chapter 3)
+
+## Roadmap
+* Three way merge with a conflict
+* Do-pair-share
+* Resolving file-level conflicts 
+
+## Three way merge with a conflict I {style="font-size: 0.8em"}
+* Let's now switch examples and re-build our tinkertoy
+* We will look at a **different** three way merge situation
+* We will use the repo [merge_example](https://github.com/uchicago-harris-dap/merge_example)
+
+
+## Three way merge with a conflict II
+
+**Original Code**
+```{python}
+#| eval: false
+#| echo: true
+
+
+'''
+A function that adds x to 3
+'''
+def add(x):
+    return (x + 3)
+```
+
+
+**Alternate Versions**
+
+\tiny
+:::: {.columns}
+
+::: {.column width="30%"}
+```{python}
+#| eval: false
+#| echo: true
+
+
+'''
+A function that adds x to 4
+'''
+def add(x):
+    return (x + 4)
+```
+
+```{}
+% git switch main
+```
+:::
+
+::: {.column width="30%"}
+```{python}
+#| eval: false
+#| echo: true
+
+'''
+A function that adds a list of numbers together
+'''
+def add(x):
+    return sum(x)
+```
+
+```{}
+% git switch iss53
+```
+:::
+
+::: {.column width="30%"}
+```{python}
+#| eval: false
+#| echo: true
+
+'''
+A function that adds x to y
+'''
+def add(x, y):
+    return (x + y)
+```
+
+```{}
+% git switch hotfix
+```
+:::
+
+::::
+
+\normalsize
+
+* Running *git switch* command switches to different branches, and each branch contains a different version of *add.py*
+
+
+<!--which has the following commit history:
+
+\footnotesize
+
+| name | branch   | content                                  | parent    | conflict? |
+|------|----------|------------------------------------------|-----------|-----------|
+| C0   | `main`   | Create `add.py`, which adds x to 3       | none      | no        |
+| C1   | `hotfix` | Change `add.py` to add x and y           | C0        | no        |
+| C2   | `iss53`  | Change `add.py` to add a list            | C0      | no        |
+| C3   | `main`   | Change `add.py` to add x to 4            | C0         | no        | -->
+<!-- | C4   | `main`   | Merge `hotfix` into `main`               | C1 \& C3 | yes!      | -->
+
+\normalsize
+
+## Three way merge with a conflict II
+
+![](img/merge_example1.png){fig-align="center" height=80%}
+
+
+## Three way merge with a conflict III
+
+* We will try to merge hotfix into main
+![](img/merge_example2.png){fig-align="center" height=80%}
+
+
+## Three way merge with a conflict V {style="font-size: 0.8em"}
+* Now let's try to merge `main` and `hotfix` together
+* Doing so will create a new commit, C4
+
+\footnotesize
+
+
+| name | branch   | content                                  | parent    | conflict? |
+|------|----------|------------------------------------------|-----------|-----------|
+| C0   | `main`   | Create `add.py`, which adds x to 3       | none      | no        |
+| C1   | `hotfix` | Change `add.py` to add x and y           | C0        | no        |
+| C2   | `iss53`  | Change `add.py` to add a list  | C0        | no        |
+| C3   | `main`   | Change `add.py` to add x to 4            | C0         | no        |
+| C4   | `main`   | Merge `hotfix` into `main`               | C1 \& C3 | yes!      |
+
+\normalsize
+
+
+## Three way merge with a conflict VI
+```{}
+% git switch main
+% git merge hotfix --no-ff -m "reconcile addition"
+```
+
+. . .
+
+* Because we have different versions of `add.py` in each branch, merging `hotfix` into `main` causes conflicts!
+* Uh oh
+```{}
+Auto-merging add.py
+CONFLICT (content): Merge conflict in add.py
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+## Three way merge with a conflict VII {style="font-size: 0.8em"}
+* After you type `git merge hotfix`, git will edit your `add.py` file and use the following format wherever it finds a conflict:
+
+![](img/merge_conflicts_1.png){fig-align="center" width=100%}
+
+
+
+
+. . .
+
+* Resolve within Visual Studio Code by clicking "Accept Current Change" or "Accept Incoming change" or "Accept Both changes". 
+* Discussion q: which one to use here?
+
+::: {.notes}
+Incoming change because it is more general
+::: 
+
+
+## Three way merge with a conflict VI
+* In this case, we'll keep what's in `hotfix`
+* How `add.py` looks after we've clicked "Accept incoming change": exactly like version in `hotfix`
+
+```{python}
+#| eval: false
+#| echo: true
+
+'''
+A function that adds x to y
+'''
+# define function
+def add(x, y):
+# arguments: x, y (numbers to add)
+    return (x + y)
+```
+
+* (Of course, you could have resolved it by "Accepting current change", which would look exactly like `main`!)
+
+
+## Three way merge with a conflict VII
+* After resolving, have to add and then commit the merge
+```{}
+git add add.py
+git commit -m "C4: resolved conflict between main and hotfix and merged"
+```
+
+## Three way merge with a conflict VIII -- image
+
+
+![](img/merge_example3.png){fig-align="center" height=70%}
+
+
+## Three way merge with a conflict VIII -- ascii
+```{}
+C0 <- C3 <- C4
+   \  C1 /
+   \  C2
+```
+
+We are writing the git tree this way since you may need to draw a commit tree on the weekly quiz
+
+<!-- 
+preserved in case we want to revive it
+\newcommand{\theHtable}{\thetable}
+| name | branch | content                   | parent    | conflict? |
+|------|--------|---------------------------|-----------|-----------|
+| C5   | `main` | Merge `iss53` into `main` | C2 and C4 | yes!      |
+--> 
+
+
+
+
+## do-pair-share: merge conflicts {style="font-size: 0.7em"}
+
+
+
+:::: {.}columns
+::: {.column width="45%"}
+![](img/merge_example4.png){fig-align="center"}
+
+:::
+
+
+::: {.column width="45%"}
+
+
+Goal: resolve the conflict between `main` and `iss53`
+
+1. On github.com, fork `https://github.com/uchicago-harris-dap/merge_example` 
+2. Clone your fork to local
+3. By default, only the `main` branch will get copied to local. Run `git switch iss53` to also copy this other branch to local. 
+    * Tip: to list all branches, run `git branch -a`
+4. Move `HEAD` back to the main branch. Then merge `iss53` into `main`
+5. Using VSCode, resolve the conflict in favor of the `iss53` version
+6. Commit the merge and name it `C5`
+
+:::
+
+::::
+
+## Resolving file-level conflicts I
+* For some file types, line-by-line adjustments will not be possible
+  * E.g. PDFs, images
+
+## Resolving file-level conflicts II
+
+
+* Consider a repo with two versions of `qmd` [here](https://github.com/uchicago-harris-dap/merge_example_pdf/pull/1)
+    * Branch *iss1* has a version of the file [*Example.pdf*](https://github.com/uchicago-harris-dap/merge_example_pdf/blob/main/Example.pdf) 
+    * Branch *main* has another version of [*Example.pdf*](https://github.com/uchicago-harris-dap/merge_example_pdf/blob/iss1/Example.pdf)
+* How to resolve the conflict when merging *main* into *iss1*?
+    * Because these are PDFs, we can't open them in a text editor to resolve the merge
+    * Instead, we have to declare which of the two files we will keep
+
+
+## Resolving file-level conflicts III 
+
+* Solution: `git checkout` command with 
+  * `--theirs`: keep file from incoming branch (`iss1`)
+  * `--ours:` keep file from current branch (`main`)
+
+
+```{}
+% git merge iss1
+% git checkout --ours Example.pdf
+```
+. . .
+
+```{}
+% git add Example.pdf
+% git commit -m "C5: Merging main into iss1"
+```
+
+
+## Summary
+
+* When branches have divergent commit histories, you may have to manually resolve conflicts
+* Some conflicts must be resolved by keeping files from one branch or another
+
+
+# Reconciling Your Version with a Remote (Chapter 2.5 and 3.5)
+
+
+## Motivation and roadmap  {style="font-size: 0.8em"}
+* Up to this point, everything we've been doing is local
+* But for collaboration, you will be working off a shared directory
+* And that shared directory is usually hosted on Github
+
+Roadmap 
+
+* Create an online repo
+* Upload commits from local repo to online repo (`push`) 
+* Download commits from remote repo to local repo (`fetch`) 
+* Reconcile commits between downloaded and local (`pull`)
+* list all branches
+* pull requests
+* fork
+
+## Create a new repo online {style="font-size: 0.8em"}
+
+[https://github.com/new](https://github.com/new) and then clone to your computer
+
+Choices
+
+1. Public or private? 
+    * Public: your final project, anything else that demonstrates your skills
+    * Private: sensitive data, pset solutions
+2. [License](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) -- document that tells others what they can/cannot do with your code. 
+    * Ganong's lab uses the MIT license -- allows others to use, modify, and disribution code with attribution
+    * Key thing is to specify **a** license, otherwise people won't be able to use your code!
+
+##  Recall: "distributed" version control 
+* Each computer fully mirrors the remote repository, including its full history
+
+<img src="img/distributed_vc.png" style="display:block; margin:0 auto;">
+
+
+
+## push
+
+```{}
+% git push  <branch_name>
+```
+
+* Upload (committed) changes from local to remote repository 
+* Until you do this, no other users will be able to see/access your commits
+
+
+## fetch
+
+```{}
+% git fetch 
+```
+
+* Download other users' pushed commits from remote repository to your computer -- but doesn't merge them in yet
+* This command does not modify any of your existing work. 
+
+<!--
+* Note: if you did some work in the same branch, you will need to resolve conflicts with the remote
+    * *git merge origin* 
+-->
+
+
+
+## pull {style="font-size: 0.8em"}
+
+* *git pull* equivalent to *git fetch* followed by *git merge*
+
+```{}
+% git pull  <branch_name>
+```
+* Automatically *fetches* branch from the remote repository, then *merges* that branch into your current branch
+* If there are reconcilable changes in both places, git will create a reconciling merge commit and ask you to confirm the content of the git message.
+* If there are irreconcilable changes, then you are in the world of the last section of lecture where you need to do some reconciliation.
+
+## see _all_ branches
+
+* list all branches, including branches in the remote repository which are not on your computer
+
+```{}
+% git branch -a 
+```
+
+Note: we already had this as a "tip" in the do-pair-share
+
+## what happens if you push and there are also changes in the remote?
+
+You will see in Terminal/Powershell: 
+
+`Updates were rejected because the remote contains work that you do not have locally. This is usually caused by another repository pushing to the same ref. You may want to first merge the remote changes (e.g., hint: 'git pull') before pushing again.`
+
+
+## Pull Requests {style="font-size: 0.8em"}
+* A pull request is a way to *propose* changes from your branch to be merged into the main project/branch
+* Doesn't `git merge` already do this? Yes, but pull requests allow teammates to review your code before it gets merged.
+* Example: an open pull request for `merge_example` repo ([here](https://github.com/uchicago-harris-dap/merge_example/pull/1))
+
+
+![](img/pull_request_2.png){fig-align="center" height=50%}
+
+## Pull Requests {style="font-size: 0.8em"}
+* Pull requests allow for line-by-line comparison of changed files on Github.com
+  * Click "+" to add a comment (show in browser)
+  * They also identify merge conflicts
+
+![](img/pull_request_1.png){fig-align="center" height=50%}
+
+
+## `git merge` vs pull requests
+
+When should I use each?
+
+* Use pull requests when you want to preview a change
+* Use pull requests when you want someone else to review the change
+* Otherwise, just use `git merge`
+
+## `fork`
+
+We have asked you a few times now to fork, without explaining what it actually is.
+
+*A fork is a remote copy of an entire remote repo.*
+
+Why fork? Experiment with and modify someone else's public code.
+
+This is useful in this class because you have a fork of the student repo. We will keep pushing commits to the public student repo and then you can pull those commits into your individual fork. You can also add your own code to the individual fork without messing up the class-wide repo.
+
+This workflow is the heart of open source development.
+
+## Summary
+
+* *push* sends changes from local to remote
+* *fetch* brings changes from remote to local
+* *pull* brings changes from remote to local and tries to reconcile via merge commit
+* _pull requests_ provide a "trial run" of merges that is visible to collaborators
+* fork creates a remote copy of a remote repo
+
+## Final Remarks
+* Git is admittedly confusing! 
+* Now that you know how it works, you have to start using it to get comfortable using the commands
+*  Professor Shi has a printed version of a Git cheatsheet (`atlassian_cheatsheet.pdf`) taped on the wall in my office. See also this [cheatsheet](https://training.github.com/downloads/github-git-cheat-sheet/)
+
+

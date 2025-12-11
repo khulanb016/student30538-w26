@@ -1,0 +1,568 @@
+---
+title: "Intro to PPHA 30538"
+author: "Peter Ganong and Maggie Shi"
+date: today
+date-format: long
+format: 
+    revealjs:
+        slide-number: true
+        show-slide-number: all
+        self-contained: true
+---
+
+# Course overview
+
+## Following along
+
+- The lectures slides and the PDF are posted on the course's student Github repository [(link)](https://github.com/uchicago-harris-dap/student30538-w26)
+
+- This afternoon in lab you will learn how to "clone" the repository so that:
+    - You can have a copy of the slides on your computer
+    - You can "pull" the latest version as they are updated
+
+## Introduction: Who Are We?
+::: {.r-fit-text}
+:::: {.columns}
+
+::: {.column width="50%"}
+- Maggie Shi
+- Assistant Professor at Harris since 2023
+- PhD in Economics from Columbia, 2022
+- Health economist thinking about how to reduce waste in healthcare
+- Avid foodie, proud dog mom of Truffles and human mom of Max
+
+:::
+
+::: {.column width="50%"}
+\vspace{2ex}
+![](pictures/maggie.jpg){ width=60% fig-align="center"}
+![](pictures/maggie_research.png){ width=60% fig-align="center"}
+
+:::
+
+::::
+:::
+
+## Introduction: Who Are We?
+::: {.r-fit-text}
+:::: {.columns}
+
+::: {.column width="70%"}
+- Peter Ganong
+- At Harris since 2017
+- 28 out of first 30 years of life in Boston (one year doing Jewish studies in Israel, one year at White House Council of Economic Advisers)
+- One year working at City of Boston analytics team
+- Research on labor and public economics, meta analysis
+- Hobbies with my kids: baking, rock climbing, swimming, Jewish learning, Cubs. Just started on coding and triathlons with my oldest...
+
+:::
+
+::: {.column width="30%"}
+\vspace{2ex}
+![](pictures/peter.jpg){ width=60% fig-align="center"}
+
+
+
+:::
+
+::::
+:::
+
+## Roadmap: what you will learn
+
+-   Data extraction, visualization and communication, plus some tech skills
+\vspace{2ex}
+    1.  Curriculum
+    2.  Apply this knowledge to the public sector
+-   Course quirks
+
+
+## Step 1: Curriculum
+
+* Version control (Git and Github) -- non-representative low workload this week
+* [Advanced visualization curriculum](https://idl.uw.edu/visualization-curriculum/intro.html)
+* Spatial data (continued)
+* Dashboards
+* Webscraping
+* "Soft skills"
+
+## Step 2: public sector: datasets
+
+-   Real-world data are both messy and informative
+\vspace{2ex}
+    -   Assess data quality
+    -   Make thoughtful data cleaning choices
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Data Type }     & \textbf{Description} \\ \hline
+Hospital closures      & CMS \\ \hline
+Healthcare fraud       & HHS OIG \\ \hline
+Parking tickets         & Chicago DOT  \\ \hline
+Public transportation         & Chicago DOT \\ \hline
+Powerplants         & EIA \\ \hline
+\end{tabular}
+\end{table}
+
+
+<!-- ## Course Quirks
+
+-   There are a number of things that make this class different from other classes that you have taken at Harris
+-   Everything good---and everything frustrating---about this course stems from these quirks -->
+
+## Course Quirks
+
+1.  teaching method -- intensive, hands-on support, active participation
+2.  self sufficiency
+3.  contemporary & realistic over perfect & clean
+
+
+## quirk 1: teaching method -- intensive, hands-on support
+
+How we try to support you:
+
+1.  Mon/Tues afternoon labs: 30 min assessment, 10 minute mini-lesson, 40 min group office hours (time to start working on problem set, and to give and get help). 
+2.  Wed/Thu/Fri: Additional 4 x 80 minutes group office hours
+3.  Practice, practice, practice
+    - The problem sets are intentionally long
+    - You should expect to commit 10-20 hrs/week to course
+    - If you're spending >20, reach out to your instructor or TA for additional help on being efficient
+4.  Awesome teaching assistants
+
+
+## Teaching Team
+:::: {.columns}
+
+::: {.column width="50%"}
+- Richard Chen
+- Head TA
+- 2nd Year PhD student
+
+\vspace{2ex}
+![](pictures/richard.jpg){ width=60% fig-align="center"}
+
+
+
+:::
+
+::: {.column width="50%"}
+- Alex Lan
+- Head TA
+- Third year PhD student
+
+\vspace{2ex}
+![](pictures/alex.png){ width=60% fig-align="center"}
+\vspace{2ex}
+
+
+:::
+
+::::
+
+## Teaching Team
+:::: {.columns}
+
+::: {.column width="50%"}
+- Mauro Ttito 
+- Instructional TA
+- Second-year MSCAPP
+
+\vspace{2ex}
+![](pictures/mauro.jpg){ width=60% fig-align="center"}
+
+
+
+:::
+
+::: {.column width="50%"}
+- Ralph Valery Valiere
+- Instructional TA
+- MPP Alum
+
+\vspace{2ex}
+![](pictures/ralph.jpg){ width=60% fig-align="center"}
+\vspace{2ex}
+
+
+:::
+
+::::
+## Teaching Team
+:::: {.columns}
+
+::: {.column width="50%"}
+- Yuxin Chen
+- Instructional TA
+- Second-year MPP
+
+\vspace{2ex}
+![](pictures/yuxin.jpg){ width=60% fig-align="center"}
+
+
+
+:::
+
+::: {.column width="50%"}
+- Yuri Chang
+- Admin TA
+- Second-year MSCAPP 
+
+\vspace{2ex}
+![](pictures/yuri.jpeg){ width=60% fig-align="center"}
+\vspace{2ex}
+
+
+:::
+
+::::
+
+<!-- 
+## quirk 1: Time commitment: 10-20 hours a week
+
+-   Learning a foreign spoken language is incredibly time-consuming.
+
+-   Learning a computer language is similarly incredibly time-consuming.
+
+-   You will sometimes spend three hours trying to figure something out and then realize that you were doing it all wrong. It will be frustrating.
+
+-   Remark: if you are spending more than 20 hours a week, reach out to your instructor or a TA for additional help on being more efficient.
+ -->
+
+## quirk 1 -- active participation required I
+
+
+-   Active, broad-based participation is key to learning in this class.
+\vspace{2ex}
+    -   In prior years, every student has asked or answered at least one question in lecture. We are striving for that goal again this year.
+-   Questions need not be sophisticated. We welcome "repeat that please" or "I don't understand that yet, can you try again?"
+
+## quirk 1 -- active participation required II
+-  We ask that you please bring your name tent in to each class
+- Attendance: taken at beginning of class
+\vspace{2ex}
+    - Up to 2 absences with no questions asked
+    - Attending via Zoom/recording request counts as an absence
+- For longer-term absences, we can work out a plan with your academic advisor
+
+
+## quirk 1 -- active participation required III
+
+-   **M**ost **U**nclear **D**iscussion cards
+\vspace{2ex}
+    -   At the end of each class, please fill out a MUD card with the material in class that was most unclear to you or any other item you were wondering about
+    -   Name is optional
+    -   When a topic comes up on multiple MUD cards, we will do a mini lesson about it at lab and/or we will discuss it at the start of the next class
+    -   This feedback loop requires \~48 hours to execute, so much better when possible to just say that you have questions in real-time!
+
+<!-- 
+## quirk 2: open source
+
+-   We are teaching entirely based on open-source, free material.
+-   You could potentially teach all of this to yourself on your own.
+-   Because we are using general-purpose open source materials, the examples from the textbook will not involve public policy. But the examples on the problem sets will. 
+ -->
+<!-- 
+## quirk 2: self-sufficiency
+
+![](pictures/tech_support_cheat_sheet.png){ width=50% fig-align="center"} -->
+
+## quirk 2: self-sufficiency
+
+Lecture will **not** cover everything you need to know for problem sets! This is a design choice for the course rather than an accident.
+
+
+*Online*
+
+-   Google: "my problem + Python"
+-   AI tools
+
+*At Harris*
+
+-   Lecture, lab, and OH
+-   Your classmates
+-   Ed -- message board for pset questions
+-   Harris tutoring
+
+
+<!-- 
+
+## quirk 2: What to do if this class is going too fast?
+
+-   Ask questions at lab + office hours (to both peers and TAs)
+-   Post questions on Ed
+-   Set up a time to talk with us (PG: at lab, MS: at office hours) -->
+
+<!-- 
+## quirk 4: contemporary & realistic over perfect & clean
+
+-   **Code**: Textbooks are very new, sometimes not even finished yet!
+-   **Datasets**: Each year we update the datasets and the problem sets. Data are messy on problem sets, just as is the case in the real world. -->
+
+
+## quirk 3: contemporary & realistic over perfect & clean
+
+-   In real-life, your manager or your end user doesn't tell you what query to run. Instead, they ask a plain English question which you need to translate into a query. The course problem sets will similarly, in some cases, ask plain English questions. They sometimes will not have a single "correct" answer.
+
+- Each year we update the datasets and the problem sets. Data are messy on problem sets, just as is the case in the real world.
+
+-   Our slides and problem sets will have typos. We have processes in place to try to prevent typos in problem sets, but they don't catch everything. If you think there's a typo, there probably is. Just ask.
+
+## comment: humility
+
+-   Learning a foreign spoken language is incredibly time-consuming. It's more than just word-for-word translation, it's partly learning a different way of thinking
+
+-   In this class, we are teaching you to think like a computer. As a result, learning a computer language is similarly incredibly time-consuming.
+
+-   You will sometimes spend three hours trying to figure something out and then realize that you were doing it all wrong. It will be frustrating.
+
+
+## Course Overview: Summary
+
+Quirks
+
+1.  teaching method -- intensive, hands-on support, active participation
+2.  self sufficiency
+3.  contemporary & realistic over perfect & clean
+
+-   This course is for you if you have the time, grit, and interest.
+
+-   Any questions?
+
+# AI tools and integrity policy
+
+
+## AI tools and integrity policy: roadmap
+
+
+* How to use AI (and how not to) in this class
+* Integrity policy
+
+<!-- 
+## Background on AI
+
+* At its core, it is a text compression algorithm. 
+* You don't learn an instrument by listening to lots of songs on Spotify. 
+* You don't learn to program by watching the machine program. 
+* It's probably a better programmer than you, but it makes dumb mistakes because it doesn't really have an intent or goal. You need both to become a programmer but also to guide it towards real ends you have (once you learn the basics).
+
+Acknowledgement: thanks to AI expert and MIT professor John Horton for helping us develop this slide -->
+
+## Use of AI 
+::: {.r-fit-text}
+There are lots of guides out there about how to use AI to learn. Our preferred framework is a letter written by six teachers [here](https://www.jonbergmann.com/blog/LearningToThinkInTheAgeofAI): "Learning to Think in the Age of AI"
+
+> Two hundred years ago, the First Industrial Revolution changed the world. Before it, nearly every task demanded human or animal strength: farming, forging, weaving, building. Work was exhausting, but physical activity kept people fit and engaged with the physical world. Then came steam engines, mechanized looms, and factories. Machines took over the hardest physical labor, and for the first time in history, many people didn’t need to toil from sunrise to sunset just to survive. Life grew more comfortable — but something subtle changed. As physical labor declined, so did natural physical fitness.
+>
+> Within a few generations, doctors began to see new ailments tied to inactivity. The same machines that gave us comfort allowed us to neglect our bodies. To stay healthy, we had to reintroduce physical effort. We built gyms, invented treadmills, and turned exercise into an activity of its own. We now take walks, count steps, and lift weights not because survival requires it, but because health does.
+
+:::
+
+
+## Use of AI 
+::: {.r-fit-text}
+>  Just as the loss of manual labor made physical fitness something we had to pursue deliberately, the loss of intellectual effort could make cognitive fitness something we must choose to maintain.
+>
+> If you let AI do your thinking for you, your ability to think will weaken — quietly, gradually, and inevitably. 
+>
+> In learning, that means:
+>
+> 1. Start with your own effort. Read, outline, write your first draft yourself. Try to solve that complex problem on your own without the aid of AI.
+>
+> 2. Then invite AI in. Ask it to critique your ideas, test your reasoning, ask you questions, show you different perspectives, or let it tutor you on the difficult problem.
+>
+> 3. Use it to challenge, not to replace. Let it raise the bar, not remove it.
+:::
+
+<!--
+## Use of AI I
+* AI is probably a better programmer than you.
+
+* But it makes dumb mistakes because it doesn't really have an intent or goal. You need both to become a programmer but also to guide it towards real ends you have (once you learn the basics). 
+* Appropriate and beneficial uses
+\vspace{2ex}
+    * Understanding a concept
+    * Debugging/cleaning up syntax
+    * Explaining error messages
+    * Give it your solution and ask if it can make code more elegant or if it has a better solution 
+
+
+## Use of AI II
+
+* Discouraged uses
+\vspace{2ex}
+    * Having it solve the whole problem (*Why? If it gets the answer right, it will often be by accident. And you won’t be able to check its work.*)
+    * Prose that interprets your plot or statistical output (*Why? Because we, and your supervisors in the future, want to know your interpretation of the data. Not ChatGPT’s interpretation of the data.*)
+    * Code completion (*Why? (a) these tools are most useful once you have gained the ability to write some code yourself (b) you will need to write some code on the final*)
+
+* Procedure: Attribution and explanation. Why? We will use a similarity checker. If you don’t attribute, your work will be considered as plagiarism.
+-->
+
+## Structure in this course
+
+| Setting | Python available? | AI available? |
+| --- | --- | --- |
+| In-class lecture | No | No |
+| In-class do-pair-share | Yes | No |
+| In-lab assessment & final | Yes | No* |
+| In-lab pset work| Yes | No |
+| Outside class and lab | Yes | Yes |
+
+By having *some* settings without AI, we are striving to create an environment where AI **enhances** your knowledge rather than **prevents** you from true learning. 
+
+
+*will use lockdown browser
+
+<!--
+To make sure AI doesn't serve as a substitute for learning, you *may not* use it for these components:
+
+* In-class exercises (do-pair-shares)
+* In-lab assessments start of lab (lockdown browser)
+* Final exam (similar in style to lab assessments)
+
+
+In addition, we note that AI is not always available! When your boss asks you to critically evaluate something, it might not be a good idea to say "wait, I need to ask AI before I share my own opinion" :-) -->
+
+## Integrity policy (I)
+
+- The overarching principle is that all code you turn in must be your own.  
+- You may not share or look at each other's code. You may not use solutions from students who previously took the class.
+- If you violate the integrity policy, you will receive an F.
+
+
+## Integrity Policy (II)
+
+**How you can collaborate and get help**
+
+- With classmates or on Ed discussion
+\vspace{2ex}
+    - Share output (e.g. plots or error messages)
+    - Discuss concepts, pseudo-code and theory (e.g. using a whiteboard)
+    - On Ed, you may post a `reprex` of a bug (more in mini-lesson next week)
+- Search for help online (e.g. StackOverflow, ChatGPT)
+\vspace{2ex}
+    - Class repo has a [wiki](https://github.com/uchicago-harris-dap/student30538-w26/wiki) with troubleshooting tips/solutions from previous course
+    - You may not copy verbatim - find inspiration and then rewrite it
+- There may be some assignments where you will work in groups. Groups will be declared when the assignment is given. In this case, you can collaborate freely.
+
+
+##  Integrity Policy (III)
+::: {.r-fit-text}
+**Attribution for help**
+
+* Work with your classmates
+\vspace{2ex}
+    * Cite the individuals you collaborate with (via google form)
+* Online sources
+\vspace{2ex}
+    * Cite in a comment all code you use with a URL, even a one-line snippet. 
+    * For AI tools provide in a comment the initial query string you used and an explanation of how you used the AI tool's response in writing your own response.
+
+**Dealing with ambiguity**
+
+If you are unsure of whether a specific action is consistent with this policy, ask.
+:::
+<!-- ## AI tools and integrity policy
+
+* ChatGPT is very helpful but can be obstacle to true learning
+* Memorize the integrity policy. You will be asked about it on the quiz. -->
+
+# Course mechanics
+## Course mechanics: platforms
+- Same as previous DAP course: **VSCode**, **Quarto**, and **Jupyter**
+- Distributing lecture material: **student Github repository** [(link)](https://github.com/uchicago-harris-dap/student30538-w26)
+    - Repo includes `environment.yml` for course under `lectures/` folder
+    - To install conda environment for this class: `conda env create -n dap -f environment.yml`
+- Distributing problem sets and submission for plagiarism checker: **Github Classroom** <!--PG to MS why do anything different in week 1? this seems to create needless complication -->
+
+
+
+## Course mechanics: use Ed to ask questions.
+
+
+\small
+
+<!--1.  **Content** questions are technical questions posted to the teaching staff and other students. (Please keep in mind collaboration policies when asking about code or solutions.)
+2.  **Clarification** questions are posts to the teaching staff about logistical details (Is there really class on XYZ holiday or is that a mistake?) or questions about homework phrasing or typos (Should question 1a of the homework be asking for the number of NAs or the number of non-missing values?). Tag these questions as "clarification."-->
+
+1. **Public Questions**
+\vspace{2ex}
+    - Use the problem set-specific categories. Try to avoid repeating already-posted questions.
+    - General: logistical details
+2. **Private Message**
+\vspace{2ex}
+    - Recording/zoom requests
+
+
+
+**Email discouraged.** Will in most cases get a response: "send a PM in Ed". However, if you have a confidential matter which cannot be shared with the teaching staff, then please email `ganong@uchicago.edu` or `m.shi@uchicago.edu` w "30538 confidential".
+
+
+## Course mechanics: grades
+
+- 6 problem sets (paired and solo) – 15%. 
+- Final group project – 30%
+- In-lab assessment – 30%. These occur at the start of each lab and are based on the previous week's problem set. We will drop your lowest assessment grade.
+- In-person final exam – 20%. These mirror the in-lab assessments and will be based on the course problem sets.
+- Attendance – 5%
+- Extra credit for collaboration – up to 2%
+
+
+
+## Course mechanics: problem sets and lab assessments
+- 6 problem sets
+    - Graded for completion, but expect to spend bulk of time on this.
+    - Due at 5pm on Saturdays, solutions and "AI TA" trained on solutions posted immediately after
+    - No late submissions
+- Mon/Tue after: 30 minute in-lab assessment
+    - Designed to be very closely linked to last week's problem set
+    - Study for these by attending lecture, doing problem set and then, once submitted, comparing your answers to the solution
+    - Final follows same structure as lab assessments
+- Wed/Thu after: debrief based on common issues in problem set and assessments
+
+## Course mechanics: collaboration
+
+* We really want this class to be a collaborative environment. At the same time, you have to learn this on your own, and no one else can learn it for you.
+* Extra credit for answering peers' content questions on Ed - up to additional 2% on final grade
+<!--* Extra credit for being acknowledged by many peers as someone who helped them with a problem set - up to additional 1% on final grade
+\vspace{2ex}
+    * Each problem set will require you to submit a Google Form indicating who you collaborated with-->
+
+## Course mechanics: final project 
+- Group formation and proposal mid-quarter
+- Presentations last week of class
+- Code and writeup due during finals
+- More details on this at upcoming lecture
+
+## Rhythms during lecture
+::: {.r-fit-text}
+* Device-free in-class lecture. 
+    * Exception: you can download slides to a tablet if you prefer digital notes to pen and paper
+* Device-used in-class do-pair-share 
+    * Pull the lecture slides before class so you have the exercise downloaded and ready to go
+* We ask that phones remain in your backpack. If you need to use your phone, please first step out of the classroom.
+* We know this is weird and unnatural, especially for a programming class! These choices are not an accident, they are based on prior experience.
+:::
+
+## Rhythms during lecture -- in-class IT setup
+
+1. On the Github website, create a **fork** of the course [repo](https://github.com/uchicago-harris-dap/student30538-w26). 
+\vspace{2ex}
+     * In response to question of why are you creating the fork, choose "for my own purposes"
+2. Go to your new fork and clone that repo to your computer. We will show how to do this in today's minilesson.
+
+<!--Detailed instructions in `README.md` file on how to clone, switch branches, and pull
+ We are separating this into two branches to avoid merge conflicts -- you will learn about these and how to resolve them in this class!-->
+
+
+## Current sizes by section
+
+As of mid-December, the section enrollments are quite uneven.
+
+1. Mon 9AM: 29
+2. Mon 10:30AM: 46
+3. Tue 9:30AM: 9
+4. Tue 11AM: 41
+
+Since the course relies heavily on participation, we strongly encourage you to switch to under-enrolled sections. You will have a better experience and learn more.
