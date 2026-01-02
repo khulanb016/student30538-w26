@@ -21,7 +21,7 @@ Each problem set and mini-lesson will have their own folders within their respec
 2. Click the green **Code** button and copy the **HTTPS URL**, **https://github.com/uchicago-harris-dap/student30538-w26**.  
 3. Open a terminal and run the following command:
    ```bash
-   git clone **https://github.com/uchicago-harris-dap/student30538-w26**
+   git clone https://github.com/uchicago-harris-dap/student30538-w26
    ```
 
 ### Step 3: Set the Upstream Remote  
