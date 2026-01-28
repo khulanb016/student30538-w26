@@ -79,6 +79,19 @@ _ = alt.themes.enable("axis_theme")
 
 
 # Introduction
+
+## Skills hopefully acquired at the end of lecture
+
+Take a single variable in a dataset. 
+
+Visualize to learn more about it. Key cases of interest:
+* Categorical variables (in lecture 2 we called these `N`/`O`)
+* Continuous variables (in lecture 2 we called these `Q`)
+    * Exploring typical values
+    * Exploring and dealing with unusual values
+
+(Up next class: covariation with two variables)
+
 ## Roadmap of lecture {style="font-size: 0.9em"}
 * Introduce three key ideas in data visualization
     * exploration vs. production
