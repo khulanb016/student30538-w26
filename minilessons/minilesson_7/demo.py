@@ -1,9 +1,11 @@
 import pydeck as pdk
 import geopandas as gpd
 import streamlit as st
+from os.path import join
 
 # 1. load GeoJSON, add color/width columns
-routes = gpd.read_file("cta_rail_lines.geojson")
+cta_file = join("minilessons/minilesson_7", "cta_rail_lines.geojson")
+routes = gpd.read_file(cta_file)
 routes["color"] = routes["type"].apply(
     lambda x: [255, 0, 0, 180] if x == "Subway" else [100, 100, 100, 140])
 routes["width"] = routes["shape_len"].astype(float) / 5000
